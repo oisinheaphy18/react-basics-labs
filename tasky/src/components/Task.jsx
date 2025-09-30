@@ -5,12 +5,14 @@ const Task = (props) => {
   const title = props.title;
   const deadline = props.deadline;
   const description = props.description;
+  const priority = props.priority;
 
   return (
     <div className="card">
       <p className="title">{title}</p>
       <p>Due: {deadline}</p>
       <p className="description">{description}</p>
+      <p className="priority">{priority}</p>
     </div>
   );
 };

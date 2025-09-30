@@ -38,3 +38,11 @@ h1 {
   line-height: 1.3;
   opacity: 0.9;
 }
+/* priority style */
+.priority {
+  font-size: 0.85rem;
+  font-style: italic;
+  margin-top: 10px;
+  line-height: 1.3;
+  opacity: 0.9;
+}
