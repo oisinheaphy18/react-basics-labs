@@ -3,8 +3,10 @@ import './App.css';
 import Task from './components/Task';
 import React, { useState } from 'react';
 import AddTaskForm from './components/Form';
+import { v4 as uuidv4 } from 'uuid'; // <-- for unique ids
 
 function App() {
+  // Task list state (unchanged)
   const [taskState, setTaskState] = useState({
     tasks: [
       { id: 1, title: 'Dishes',  description: 'Empty dishwasher',              deadline: 'Today',    priority: 'Low',    done: false },
@@ -13,6 +15,14 @@ function App() {
     ]
   });
 
+  // NEW: form state per the lab step
+  const [formState, setFormState] = useState({
+    title: '',
+    description: '',
+    deadline: ''
+  });
+
+  // Handlers already present
   const doneHandler = (taskIndex) => {
     const tasks = [...taskState.tasks];
     tasks[taskIndex].done = !tasks[taskIndex].done;
@@ -24,6 +34,47 @@ function App() {
     const tasks = [...taskState.tasks];
     tasks.splice(taskIndex, 1);
     setTaskState({ tasks });
+  };
+
+  // NEW: form change handler (switch on input "name")
+  const formChangeHandler = (event) => {
+    let form = { ...formState };
+
+    switch (event.target.name) {
+      case 'title':
+        form.title = event.target.value;
+        break;
+      case 'description':
+        form.description = event.target.value;
+        break;
+      case 'deadline':
+        form.deadline = event.target.value;
+        break;
+      default:
+        form = formState;
+    }
+    setFormState(form);
+  };
+
+  // The lab asks to log formState to verify changes
+  console.log(formState);
+
+  // NEW: form submit handler (uses uuid)
+  const formSubmitHandler = (event) => {
+    event.preventDefault();
+
+    const tasks = [...taskState.tasks];
+    const form = { ...formState };
+
+    form.id = uuidv4();
+    // keep behaviour consistent with existing cards
+    form.done = false;
+
+    tasks.push(form);
+    setTaskState({ tasks });
+
+    // optional: clear the form after submit
+    setFormState({ title: '', description: '', deadline: '' });
   };
 
   return (
@@ -46,8 +97,9 @@ function App() {
         ))}
       </div>
 
+      {/* Form BELOW the cards — now wired with change & submit */}
       <section className="formWrap">
-        <AddTaskForm />
+        <AddTaskForm submit={formSubmitHandler} change={formChangeHandler} />
       </section>
     </div>
   );
