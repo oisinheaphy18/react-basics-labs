@@ -1,48 +1,75 @@
 /* src/App.css */
 
-/* container for the whole app */
+/* page container */
 .container {
-  max-width: 500px;
+  max-width: 980px;            /* wider so 3 cards fit */
   margin: 40px auto;
-  padding: 20px;
+  padding: 0 20px 40px;
   font-family: Arial, sans-serif;
 }
 
-/* header title */
-h1 {
+/* header bar like the lab image */
+.header {
+  background: #808080;
+  color: white;
+  padding: 16px 20px;
+  margin-bottom: 24px;
+}
+.header h1 {
   text-align: center;
-  margin-bottom: 20px;
+  margin: 0;
 }
 
-/* card style for each task */
+/* row of cards */
+.cards {
+  display: flex;
+  gap: 24px;
+  flex-wrap: nowrap;           /* keep them in one row (wrap if your screen is narrow) */
+}
+
+/* card styling */
 .card {
-  background: #f7f7f7;
-  padding: 15px;
-  margin-bottom: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: relative;          /* needed so absolute button anchors to this */
+  color: white;                /* white text on teal like the screenshot */
+  width: 260px;                /* approximate width from the lab image */
+  min-height: 220px;
+  padding: 18px;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.12);
 }
 
-/* task title */
+/* title */
 .title {
-  font-weight: bold;
+  font-weight: 700;
   font-size: 1.1rem;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
-/* description style */
-.description {
-  font-size: 0.85rem;
-  font-style: italic;
-  margin-top: 10px;
-  line-height: 1.3;
-  opacity: 0.9;
-}
-/* priority style */
+/* italic description & priority */
+.description,
 .priority {
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   font-style: italic;
   margin-top: 10px;
   line-height: 1.3;
-  opacity: 0.9;
+  opacity: 0.95;
+}
+
+/* done button per lab */
+button {
+  border: none;
+  border-radius: 3px;
+  font-style: italic;
+  font-size: 0.8em;
+  margin: 4px 6px;
+  width: 50px;
+  height: 25px;
+}
+.doneButton {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  color: green;
+  background: #eef6ec;
+  cursor: pointer;
 }

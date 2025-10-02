@@ -1,18 +1,20 @@
+// src/components/Task.jsx
 import React from 'react';
 
 const Task = (props) => {
-  // read the props passed in
-  const title = props.title;
-  const deadline = props.deadline;
-  const description = props.description;
-  const priority = props.priority;
+  const { title, deadline, description, priority, done } = props;
 
   return (
-    <div className="card">
+    <div
+      className="card"
+      style={{ backgroundColor: done ? 'lightgrey' : '#5bb4c4' }}  // <— required ternary
+    >
       <p className="title">{title}</p>
-      <p>Due: {deadline}</p>
+      <p><strong>Due:</strong> {deadline}</p>
       <p className="description">{description}</p>
       <p className="priority">{priority}</p>
+
+      <button onClick={props.markDone} className="doneButton">Done</button>
     </div>
   );
 };
