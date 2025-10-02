@@ -2,6 +2,7 @@
 import './App.css';
 import Task from './components/Task';
 import React, { useState } from 'react';
+import AddTaskForm from './components/Form';
 
 function App() {
   const [taskState, setTaskState] = useState({
@@ -19,17 +20,17 @@ function App() {
     console.log(`${taskIndex} ${tasks[taskIndex].done}`);
   };
 
-    const deleteHandler = (taskIndex) => {
+  const deleteHandler = (taskIndex) => {
     const tasks = [...taskState.tasks];
     tasks.splice(taskIndex, 1);
-    setTaskState({tasks});
-  } 
-
+    setTaskState({ tasks });
+  };
 
   return (
     <div className="container">
       <header className="header"><h1>Tasky</h1></header>
 
+      {/* Row of cards */}
       <div className="cards">
         {taskState.tasks.map((task, index) => (
           <Task
@@ -40,10 +41,14 @@ function App() {
             priority={task.priority}
             done={task.done}
             markDone={() => doneHandler(index)}
-            deleteTask = {() => deleteHandler(index)}
+            deleteTask={() => deleteHandler(index)}
           />
         ))}
       </div>
+
+      <section className="formWrap">
+        <AddTaskForm />
+      </section>
     </div>
   );
 }

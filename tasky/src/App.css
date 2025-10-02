@@ -2,7 +2,7 @@
 
 /* page container */
 .container {
-  max-width: 980px;            /* wider so 3 cards fit */
+  max-width: 980px;
   margin: 40px auto;
   padding: 0 20px 40px;
   font-family: Arial, sans-serif;
@@ -24,14 +24,15 @@
 .cards {
   display: flex;
   gap: 24px;
-  flex-wrap: nowrap;           /* keep them in one row (wrap if your screen is narrow) */
+  flex-wrap: nowrap;
+  margin-bottom: 28px; /* space before the form */
 }
 
 /* card styling */
 .card {
-  position: relative;          /* needed so absolute button anchors to this */
-  color: white;                /* white text on teal like the screenshot */
-  width: 260px;                /* approximate width from the lab image */
+  position: relative;          /* anchors absolute buttons */
+  color: white;
+  width: 260px;
   min-height: 220px;
   padding: 18px;
   border-radius: 6px;
@@ -55,15 +56,15 @@
   opacity: 0.95;
 }
 
-/* done button per lab */
+/* buttons */
 button {
   border: none;
   border-radius: 3px;
   font-style: italic;
   font-size: 0.8em;
   margin: 4px 6px;
-  width: 50px;
-  height: 25px;
+  width: 60px;
+  height: 26px;
 }
 .doneButton {
   position: absolute;
@@ -75,7 +76,53 @@ button {
 }
 .deleteButton {
   position: absolute;
-  bottom: 5px;
-  right: 5px;
-  color: red;
+  bottom: 8px;
+  right: 8px;
+  color: #e74c3c;
+  background: #ffe9e7;
+  cursor: pointer;
+}
+
+/* --- FORM STYLES --- */
+/* wrapper to center and limit width if desired */
+.formWrap {
+  /* optional: keep full width; you can cap it if you like
+     max-width: 720px;
+     margin: 0 auto;
+  */
+}
+
+.taskForm {
+  text-align: left;
+  width: 100%;           /* full width under container */
+  margin: 0 auto;
+}
+
+.taskForm label {
+  display: block;
+  margin: 8px 0 6px;
+}
+
+.taskForm input[type=text],
+.taskForm input[type=date] {
+  width: 100%;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.taskForm input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin-top: 6px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.taskForm input[type=submit]:hover {
+  background-color: #45a049;
 }

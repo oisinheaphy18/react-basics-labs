@@ -7,7 +7,7 @@ const Task = (props) => {
   return (
     <div
       className="card"
-      style={{ backgroundColor: done ? 'lightgrey' : '#5bb4c4' }}  // <— required ternary
+      style={{ backgroundColor: done ? 'lightgrey' : '#5bb4c4' }}
     >
       <p className="title">{title}</p>
       <p><strong>Due:</strong> {deadline}</p>
@@ -15,7 +15,7 @@ const Task = (props) => {
       <p className="priority">{priority}</p>
 
       <button onClick={props.markDone} className="doneButton">Done</button>
-     <button className='deleteButton' onClick={props.deleteTask}>Delete</button>
+      <button className="deleteButton" onClick={props.deleteTask}>Delete</button>
     </div>
   );
 };
