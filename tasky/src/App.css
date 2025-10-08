@@ -33,7 +33,7 @@
   position: relative;          /* anchors absolute buttons */
   color: white;
   width: 260px;
-  min-height: 220px;
+  min-height: 230px;
   padding: 18px;
   border-radius: 6px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.12);
@@ -46,9 +46,8 @@
   margin-bottom: 8px;
 }
 
-/* italic description & priority */
-.description,
-.priority {
+/* italic description */
+.description {
   font-size: 0.95rem;
   font-style: italic;
   margin-top: 10px;
@@ -65,6 +64,7 @@ button {
   margin: 4px 6px;
   width: 60px;
   height: 26px;
+  cursor: pointer;
 }
 .doneButton {
   position: absolute;
@@ -72,7 +72,6 @@ button {
   left: 8px;
   color: green;
   background: #eef6ec;
-  cursor: pointer;
 }
 .deleteButton {
   position: absolute;
@@ -80,21 +79,14 @@ button {
   right: 8px;
   color: #e74c3c;
   background: #ffe9e7;
-  cursor: pointer;
 }
 
 /* --- FORM STYLES --- */
-/* wrapper to center and limit width if desired */
-.formWrap {
-  /* optional: keep full width; you can cap it if you like
-     max-width: 720px;
-     margin: 0 auto;
-  */
-}
+.formWrap { }
 
 .taskForm {
   text-align: left;
-  width: 100%;           /* full width under container */
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -104,13 +96,15 @@ button {
 }
 
 .taskForm input[type=text],
-.taskForm input[type=date] {
+.taskForm input[type=date],
+.taskForm select {
   width: 100%;
   padding: 12px 16px;
   margin-bottom: 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+  background: #fff;
 }
 
 .taskForm input[type=submit] {
@@ -121,8 +115,34 @@ button {
   margin-top: 6px;
   border: none;
   border-radius: 4px;
-  cursor: pointer;
 }
 .taskForm input[type=submit]:hover {
   background-color: #45a049;
+}
+
+/* --- Exercise Three: priority badges --- */
+.priorityBadge {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 4px 10px;
+  border-radius: 999px; /* pill */
+  font-size: 0.85rem;
+  font-style: normal;
+  background: #ddd;
+  color: #222;
+}
+
+.priorityBadge.low {
+  background: #bfe8b7; /* soft green */
+  color: #205b1f;
+}
+
+.priorityBadge.medium {
+  background: #ffde8a; /* amber */
+  color: #815a00;
+}
+
+.priorityBadge.high {
+  background: #f17b7b; /* red */
+  color: #5b0b0b;
 }

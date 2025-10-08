@@ -3,10 +3,10 @@ import './App.css';
 import Task from './components/Task';
 import React, { useState } from 'react';
 import AddTaskForm from './components/Form';
-import { v4 as uuidv4 } from 'uuid'; // <-- for unique ids
+import { v4 as uuidv4 } from 'uuid'; // for unique ids
 
 function App() {
-  // Task list state (unchanged)
+  // Task list state
   const [taskState, setTaskState] = useState({
     tasks: [
       { id: 1, title: 'Dishes',  description: 'Empty dishwasher',              deadline: 'Today',    priority: 'Low',    done: false },
@@ -15,14 +15,15 @@ function App() {
     ]
   });
 
-  // NEW: form state per the lab step
+  // --- Exercise Two: form state now includes priority ---
   const [formState, setFormState] = useState({
     title: '',
     description: '',
-    deadline: ''
+    deadline: '',
+    priority: 'Medium'  // default like the screenshot
   });
 
-  // Handlers already present
+  // toggle done
   const doneHandler = (taskIndex) => {
     const tasks = [...taskState.tasks];
     tasks[taskIndex].done = !tasks[taskIndex].done;
@@ -30,36 +31,34 @@ function App() {
     console.log(`${taskIndex} ${tasks[taskIndex].done}`);
   };
 
+  // delete
   const deleteHandler = (taskIndex) => {
     const tasks = [...taskState.tasks];
     tasks.splice(taskIndex, 1);
     setTaskState({ tasks });
   };
 
-  // NEW: form change handler (switch on input "name")
+  // Exercise Two: change handler for form inputs
   const formChangeHandler = (event) => {
     let form = { ...formState };
 
-    switch (event.target.name) {
-      case 'title':
-        form.title = event.target.value;
-        break;
-      case 'description':
-        form.description = event.target.value;
-        break;
-      case 'deadline':
-        form.deadline = event.target.value;
-        break;
-      default:
-        form = formState;
+    // use input "name" to decide which field to update
+    if (event.target.name === 'title') {
+      form.title = event.target.value;
+    } else if (event.target.name === 'description') {
+      form.description = event.target.value;
+    } else if (event.target.name === 'deadline') {
+      form.deadline = event.target.value;
+    } else if (event.target.name === 'priority') {
+      form.priority = event.target.value;
     }
     setFormState(form);
   };
 
-  // The lab asks to log formState to verify changes
+  // (lab asks to log this as you type)
   console.log(formState);
 
-  // NEW: form submit handler (uses uuid)
+  // Exercise Two: submit adds a new task (with priority)
   const formSubmitHandler = (event) => {
     event.preventDefault();
 
@@ -67,14 +66,18 @@ function App() {
     const form = { ...formState };
 
     form.id = uuidv4();
-    // keep behaviour consistent with existing cards
     form.done = false;
+
+    // simple guard: if priority somehow empty, keep Medium
+    if (!form.priority) {
+      form.priority = 'Medium';
+    }
 
     tasks.push(form);
     setTaskState({ tasks });
 
-    // optional: clear the form after submit
-    setFormState({ title: '', description: '', deadline: '' });
+    // clear inputs after submit (keep Medium default)
+    setFormState({ title: '', description: '', deadline: '', priority: 'Medium' });
   };
 
   return (
@@ -97,7 +100,7 @@ function App() {
         ))}
       </div>
 
-      {/* Form BELOW the cards — now wired with change & submit */}
+      {/* Form BELOW the cards */}
       <section className="formWrap">
         <AddTaskForm submit={formSubmitHandler} change={formChangeHandler} />
       </section>
